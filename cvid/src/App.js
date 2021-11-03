@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from "react";
 import './App.css';
-
+import Axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 function App() {
+  const [covidData, setCovidData] = useState([]);
+
+  const fetchCovidData = async () => {
+    const { data } = await Axios.get(
+      "https://corona.lmao.ninja/v2/countries?yesterday=&sort="
+    );
+    const covidData = data;
+	
+	for(let i=0; i < covidData.length; i++)
+	{
+		covidData[i]["id"] = uuidv4()
+	}
+	
+    setCovidData(covidData);
+    console.log(covidData);
+  };
+
+  useEffect(() => {
+    fetchCovidData();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {covidData.map((covidData) => (
+        <p key={covidData.id}>Country: {covidData.country} Deaths: {covidData.deaths}</p>
+      ))}
     </div>
   );
 }
 
 export default App;
+
