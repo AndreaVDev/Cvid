@@ -17,6 +17,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
 import { styled } from '@mui/material/styles';
 import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
 
 const Home = props => {
 	const [covidsData, setCovidData] = useState([]);
@@ -66,6 +67,9 @@ const Home = props => {
   alignItems="center"
   justifyContent="center"
   style={{ minHeight: '100vh' }}>
+  <Typography variant="h1" component="h1">
+	Covid data
+	</Typography>
     <List>
       {covidsData.map(covidData => {
         return (
