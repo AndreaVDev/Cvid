@@ -69,9 +69,9 @@ const Home = props => {
     <List>
       {covidsData.map(covidData => {
         return (
-		<div>
-		<ListItem key={covidData.id}>
-            {covidData.country}
+		<div key={covidData.id}>
+		<ListItem >
+            <ListItemText primary={covidData.country} />
             <Link className="link-details" 
               to={{
                 pathname: `/view-details/${covidData.id}`,
